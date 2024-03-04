@@ -13,7 +13,7 @@ import org.springframework.cache.annotation.EnableCaching;
 @EnableCaching
 public class CacheableDoubleRequestApplication implements CommandLineRunner {
     @Autowired
-    EmployeeClientImpl claimClient;
+    EmployeeClientImpl empClient;
     private MockWebServer mockWebServer;
 
     public static void main(String[] args) {
@@ -30,7 +30,7 @@ public class CacheableDoubleRequestApplication implements CommandLineRunner {
         mockWebServer.enqueue(new MockResponse().setResponseCode(200)
                 .setHeader("content-type", "application/json").setBody("{\"EmployeeID\": 12345}"));
 
-        claimClient.findEmployee(12345).blockLast();
+        empClient.findEmployee(12345).blockLast();
 
         mockWebServer.shutdown();
     }
